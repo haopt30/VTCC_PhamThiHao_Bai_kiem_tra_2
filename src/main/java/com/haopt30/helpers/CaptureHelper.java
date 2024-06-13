@@ -55,6 +55,7 @@ public class CaptureHelper extends ScreenRecorder{
     // Start record video
     public static void startRecord(String methodName) {
         //Tạo thư mục để lưu file video vào
+        LogUtils.info("start recording");
         File file = new File(SystemHelper.getCurrentDir() + PropertiesHelper.getValue("RECORDVIDEO_PATH"));
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = screenSize.width;
@@ -66,9 +67,14 @@ public class CaptureHelper extends ScreenRecorder{
         try {
             screenRecorder = new CaptureHelper(gc, captureSize, new Format(MediaTypeKey, MediaType.FILE, MimeTypeKey, MIME_AVI), new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE, CompressorNameKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE, DepthKey, 24, FrameRateKey, Rational.valueOf(15), QualityKey, 1.0f, KeyFrameIntervalKey, 15 * 60), new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black", FrameRateKey, Rational.valueOf(30)), null, file, methodName);
             screenRecorder.start();
+            LogUtils.info("record started");
         } catch (IOException e) {
+            LogUtils.warn(e.getLocalizedMessage());
+            System.out.println(e.getLocalizedMessage());
             throw new RuntimeException(e);
         } catch (AWTException e) {
+            LogUtils.warn(e.getLocalizedMessage());
+            System.out.println(e.getLocalizedMessage());
             throw new RuntimeException(e);
         }
     }

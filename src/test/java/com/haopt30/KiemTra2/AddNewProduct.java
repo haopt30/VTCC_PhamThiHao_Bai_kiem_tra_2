@@ -12,6 +12,7 @@ public class AddNewProduct extends BaseTest {
     private String PRODUCT_NAME = "product hao 1";
     @Test
     public void testCreateNewProduct() throws InterruptedException {
+        CaptureHelper.startRecord("testCreateNewProduct");
         driver.get("https://cms.anhtester.com/login");
         driver.findElement(By.xpath("//input[@id='email']")).sendKeys("admin@example.com");
         driver.findElement(By.xpath("//input[@id='password']")).sendKeys("123456");
@@ -93,6 +94,7 @@ public class AddNewProduct extends BaseTest {
 
 //        LogUtils.info("hao test logs");
 //        LogUtils.info("Product name: " + PRODUCT_NAME);
+        CaptureHelper.stopRecord();
 
   }
 }
